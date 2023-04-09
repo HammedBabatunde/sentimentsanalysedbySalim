@@ -39,6 +39,6 @@ stages:
           $(tag)
     - task: AzureWebAppContainer@1
       inputs:
-        azureSubscription: 'Visual Studio Enterprise Subscription(f5261015-0552-42be-8274-eb1eecece5d6)'
+        azureSubscription: 'Visual Studio Enterprise Subscription(3)(f5261015-0552-42be-8274-eb1eecece5d6)'
         appName: 'salim-AI'
         containers: 'salimproject.azurecr.io/salim-ai:22'
