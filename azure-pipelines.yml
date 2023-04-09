@@ -34,5 +34,10 @@ stages:
         repository: 'salim-ai'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+    - task: AzureWebAppContainer@1
+      inputs:
+        azureSubscription: 'Visual Studio Enterprise Subscription(f5261015-0552-42be-8274-eb1eecece5d6)'
+        appName: 'salim-project'
+        containers: 'salimproject.azurecr.io/salim-ai:21'
 
 
