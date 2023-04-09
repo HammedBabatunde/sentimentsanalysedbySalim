@@ -1,0 +1,45 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'fba7b6e7-2366-4840-a61e-a68fa9028d07'
+  imageRepository: 'hammedbabatundesentimentsanalysedbysalim'
+  containerRegistry: 'salimproject.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+
+    - task: AzureWebAppContainer@1
+      inputs:
+        azureSubscription: 'Visual Studio Enterprise Subscription(1)(f5261015-0552-42be-8274-eb1eecece5d6)'
+        appName: 'salim-project'
+        containers: 'salimproject.azurecr.io/salim-ai:25'
