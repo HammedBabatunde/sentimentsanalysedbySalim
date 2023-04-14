@@ -38,8 +38,16 @@ stages:
         tags: |
           $(tag)
     
+- stage: Deploy
+  displayName: Deploy to Azure Web Apps for Containers
+  jobs:
+  - job: Deploy
+    displayName: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    steps:
     - task: AzureWebAppContainer@1
       inputs:
         azureSubscription: 'Visual Studio Enterprise Subscription(1)(f5261015-0552-42be-8274-eb1eecece5d6)'
         appName: 'salim-AI'
-        containers: 'salimproject.azurecr.io/salim-ai:21'
+        containers: 'salimproject.azurecr.io/salim-ai:22'
