@@ -10,9 +10,9 @@ resources:
 
 variables:
   # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '2c14cee4-97e2-43e7-82fb-8da257d8f20f'
+  dockerRegistryServiceConnection: '8d462591-df9e-4c44-8661-015d1d467877'
   imageRepository: 'salim-ai'
-  containerRegistry: 'salimai009.azurecr.io'
+  containerRegistry: 'salimai010.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
 
@@ -49,5 +49,5 @@ stages:
     - task: AzureWebAppContainer@1
       inputs:
         azureSubscription: 'Visual Studio Enterprise Subscription(1)(f5261015-0552-42be-8274-eb1eecece5d6)'
-        appName: 'salimai009'
-        containers: "salimai009.azurecr.io/salim-ai:$(tag)"
+        appName: 'salimai010'
+        containers: "salimai010.azurecr.io/salim-ai:$(tag)"
