@@ -1,11 +1,11 @@
 @description('Name of the connected Container Registry')
-param containerRegistryName string = 'salimai009'
+param containerRegistryName string = 'salimai010'
 
 @description('Name of the TodoApi Container App')
-param ContainerAppName string = 'salimai009'
+param ContainerAppName string = 'salimai010'
 
 @description('Name of the TodoApi Container App')
-param containerAppPlanName string = 'salimai009'
+param containerAppPlanName string = 'salimai010'
 
 // @description('Name of Log Analytics Workspace')
 // param logAnalyticsWorkspaceName string = 'salimai003'
