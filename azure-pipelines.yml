@@ -23,7 +23,7 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: Create Azure Webs Apps Infrastructure
+- stage: Create 
   displayName: Create Azure Webs Apps Infrastructure
   jobs:
   - job: Create
@@ -42,7 +42,7 @@ stages:
           az deployment group create --resource-group $(resourceGroupName) --template-file $(templateFile)
 
 
-- stage: Build Docker Image and Push to Azure Container Registry
+- stage: Build 
   displayName: Build and push stage
   jobs:
   - job: Build
