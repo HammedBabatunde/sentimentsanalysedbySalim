@@ -106,15 +106,15 @@ resource siteName_resource 'Microsoft.Web/sites@2016-08-01' = {
         }
         {
           name: 'DOCKER_REGISTRY_SERVER_URL'
-          value: containerRegistry.properties.loginServer
+          value: 'sentinment001.azurecr.io'
         }
         {
           name: 'DOCKER_REGISTRY_SERVER_USERNAME'
-          value: containerRegistry.name
+          value: 'sentinment001'
         }
         {
           name: 'DOCKER_REGISTRY_SERVER_PASSWORD'
-          value: containerRegistry.listCredentials().passwords[0].value
+          value: 'QxQNByVej3bFAMNa5BLFqtCOLB4qQnlME5nRfrZaic+ACRDc9kdL'
         }
       ]
       linuxFxVersion: 'DOCKER'
