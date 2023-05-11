@@ -1,35 +1,10 @@
-@description('Name of the connected Container Registry')
-param containerRegistryName string = 'salimai010'
+@description('Name of the TodoApi Container App')
+param ContainerAppName string = 'salimai020'
 
 @description('Name of the TodoApi Container App')
-param ContainerAppName string = 'salimai010'
-
-@description('Name of the TodoApi Container App')
-param containerAppPlanName string = 'salimai010'
-
-// @description('Name of Log Analytics Workspace')
-// param logAnalyticsWorkspaceName string = 'salimai003'
-
-// @description('Name of the App Service Environment')
-// param environment_name string = 'salimai003'
+param containerAppPlanName string = 'salimai020'
 
 param location string = resourceGroup().location
-
-
-
-resource containerRegistry 'Microsoft.ContainerRegistry/registries@2021-12-01-preview' = {
-  name: containerRegistryName
-  location: location
-  sku: {
-    name: 'Basic'
-  }
-  properties: {
-    adminUserEnabled: true
-  }
-}
-
-
-
 
 // resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
 //   name: logAnalyticsWorkspaceName
