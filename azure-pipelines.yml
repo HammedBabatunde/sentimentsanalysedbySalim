@@ -72,6 +72,6 @@ stages:
       inputs:
         azureSubscription: $(azureServiceConnection)
         appName: 'salimai020'
-        containers: "$(containerRegistry)/$(salim-ai):$(tag)"
+        containers: "$(containerRegistry)/$(imageRepository):$(tag)"
         
 
