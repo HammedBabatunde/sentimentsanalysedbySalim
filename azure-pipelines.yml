@@ -1,6 +1,4 @@
-# Docker
-# Build and push an image to Azure Container Registry
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
 
 trigger:
 - master
@@ -9,18 +7,42 @@ resources:
 - repo: self
 
 variables:
-  # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '8d462591-df9e-4c44-8661-015d1d467877'
+  azureServiceConnection: 'Visual Studio Enterprise Subscription(f5261015-0552-42be-8274-eb1eecece5d6)'
+
+  # Container registry service connection established during pipeline creation 
+  dockerRegistryServiceConnection: '86bcb153-85f5-433f-9d46-1aa3d311e579'
   imageRepository: 'salim-ai'
-  containerRegistry: 'salimai010.azurecr.io'
+  containerRegistry: 'sentinment001.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
+  
+  resourceGroupName: 'azure-devops-demo'
+  templateFile: 'main.bicep'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: Build
+- stage: Create Azure Webs Apps Infrastructure
+  displayName: Create Azure Webs Apps Infrastructure
+  jobs:
+  - job: Create
+    displayName: Create Azure Webs Apps Infrastructure
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: AzureCLI@2
+      displayName: 
+      inputs:
+        azureSubscription: $(azureServiceConnection)
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az --version
+          az deployment group create --resource-group $(resourceGroupName) --template-file $(templateFile)
+
+
+- stage: Build Docker Image and Push to Azure Container Registry
   displayName: Build and push stage
   jobs:
   - job: Build
@@ -48,6 +70,8 @@ stages:
     steps:
     - task: AzureWebAppContainer@1
       inputs:
-        azureSubscription: 'Visual Studio Enterprise Subscription(1)(f5261015-0552-42be-8274-eb1eecece5d6)'
-        appName: 'salimai010'
-        containers: "salimai010.azurecr.io/salim-ai:$(tag)"
+        azureSubscription: $(azureServiceConnection)
+        appName: 'salimai020'
+        containers: "$(containerRegistry)/$(salim-ai):$(tag)"
+        
+
